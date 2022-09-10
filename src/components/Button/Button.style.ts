@@ -6,12 +6,12 @@ export const Container = styled.div`
   display: flex;
   background-color: #1550ff;
   border-radius: 0.625rem; /* 10px */
-  opacity: 1;
   transition: all ease-in-out 0.3s;
+  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
 
   &:hover {
     cursor: pointer;
-    opacity: 0.8;
+    background-color: #1552bf;
   }
 `;
 
