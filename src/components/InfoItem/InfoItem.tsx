@@ -1,4 +1,4 @@
-import * as C from "./style";
+import * as C from "./InfoItem.style";
 
 type Props = {
   label: string;
