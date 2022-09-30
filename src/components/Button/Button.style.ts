@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   background-color: #1550ff;
   border-radius: 0.625rem; /* 10px */
-  transition: all ease-in-out 0.3s;
+  transition: background-color 0.1s;
   filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
 
   &:hover {
