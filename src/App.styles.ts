@@ -48,3 +48,10 @@ export const GridArea = styled.div`
     margin: 0 1.25rem; /* 0 20px */
   }
 `;
+
+export const Grid = styled.div`
+  width: 26.875rem; /* 430px */ 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.625rem; /* 10px */
+`;
