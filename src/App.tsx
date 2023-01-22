@@ -26,7 +26,54 @@ function App() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [playing, timeElapsed])
+  }, [playing, timeElapsed]);
+
+  // verify if opened equal
+  useEffect(() => {
+    if (shownCount === 2) {
+      let opened = gridItems.filter(item => item.shown === true);
+      if (opened.length === 2) {
+
+        if (opened[0].item === opened[1].item) {
+          // v1 - if both are equal, make every "shown" permanent
+          let tmpGrid = [...gridItems];
+
+          for (let i in tmpGrid) {
+            if (tmpGrid[i].shown) {
+              tmpGrid[i].permanentShown = true;
+              tmpGrid[i].shown = false;
+            }
+          }
+
+          setGridItems(tmpGrid);
+          setShownCount(0);
+
+        } else {
+          // v2 - id they are NOT equal, close al "shown"
+          setTimeout(() => {
+            let tmpGrid = [...gridItems];
+
+            for (let i in tmpGrid) {
+              tmpGrid[i].shown = false;
+            }
+
+            setGridItems(tmpGrid);
+            setShownCount(0);
+          }, 1000);
+        }
+
+        setMoveCount(moveCount => moveCount + 1);
+      }
+    }
+  }, [shownCount, gridItems]);
+
+  // verify if game is over
+  useEffect(() => {
+    if (moveCount > 0 && gridItems.every(item => item.permanentShown === true)) {
+      setPlaying(false);
+    }
+  }, [moveCount, gridItems]);
+
 
   function resetAndCreateGrid() {
     // Passo 1 - resetar o jogo
@@ -65,7 +112,16 @@ function App() {
   };
 
   function handleItemClick(index: number) {
+    if (playing && index !== null && shownCount < 2) {
+      let tmpGrid = [...gridItems];
 
+      if (tmpGrid[index].permanentShown === false && tmpGrid[index].shown === false) {
+        tmpGrid[index].shown = true;
+        setShownCount(shownCount + 1);
+      }
+
+      setGridItems(tmpGrid);
+    }
   }
 
   return (
@@ -77,7 +133,7 @@ function App() {
 
         <C.InfoArea>
           <InfoItem label="Tempo" value={formatTimeElapsed(timeElapsed)} />
-          <InfoItem label="Movimentos" value="0" />
+          <InfoItem label="Movimentos" value={moveCount.toString()} />
         </C.InfoArea>
 
         <Button

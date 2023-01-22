@@ -50,8 +50,12 @@ export const GridArea = styled.div`
 `;
 
 export const Grid = styled.div`
-  width: 26.875rem; /* 430px */ 
+  width: 26.875rem; /* 430px */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.625rem; /* 10px */
+
+  @media(max-width: 750px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
