@@ -13,3 +13,6 @@ Roda o projeto
 ### npm run build
 
 Para colocar em produção deve da o build do projeto
+
+## Link do projeto
+[Jogo da memoria](jogo-da-memoria-99o9rz1qy-fernandoribeirosilva.vercel.app)
